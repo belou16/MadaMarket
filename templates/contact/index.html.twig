@@ -1,0 +1,143 @@
+{# templates/contact/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - MadaMarket{% endblock %}
+
+{% block body %}
+<style>
+    .contact-container {
+        max-width: 800px;
+        margin: 2rem auto;
+    }
+
+    .contact-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .contact-header h1 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-header p {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+    }
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .contact-info {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .contact-info-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-info-icon {
+        font-size: 2rem;
+    }
+
+    .contact-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    @media (max-width: 768px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="contact-container">
+    <div class="contact-header">
+        <h1>📧 Contactez-nous</h1>
+        <p>Une question ? N'hésitez pas à nous contacter</p>
+    </div>
+
+    <div class="contact-grid">
+        <div class="contact-info">
+            <h2 style="margin-bottom: 1.5rem; color: #2c3e50;">Nos Coordonnées</h2>
+            
+            <div class="contact-info-item">
+                <span class="contact-info-icon">📍</span>
+                <div>
+                    <strong>Adresse</strong><br>
+                    <span style="color: #7f8c8d;">123 Avenue de Madagascar, Paris</span>
+                </div>
+            </div>
+
+            <div class="contact-info-item">
+                <span class="contact-info-icon">📞</span>
+                <div>
+                    <strong>Téléphone</strong><br>
+                    <span style="color: #7f8c8d;">+33 1 23 45 67 89</span>
+                </div>
+            </div>
+
+            <div class="contact-info-item">
+                <span class="contact-info-icon">✉️</span>
+                <div>
+                    <strong>Email</strong><br>
+                    <span style="color: #7f8c8d;">contact@madamarket.com</span>
+                </div>
+            </div>
+
+            <div class="contact-info-item">
+                <span class="contact-info-icon">🕐</span>
+                <div>
+                    <strong>Horaires</strong><br>
+                    <span style="color: #7f8c8d;">Lun-Ven : 9h-18h</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2 style="margin-bottom: 1.5rem; color: #2c3e50;">Envoyez-nous un message</h2>
+
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.name) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.email) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.subject) }}
+                    {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.subject) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.message) }}
+                    {{ form_widget(form.message, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.message) }}
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Envoyer le message</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

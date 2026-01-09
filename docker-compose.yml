@@ -13,6 +13,16 @@ services:
     image: adminer
     ports:
       - "8080:8080"
+  php:
+    image: php:8.0-fpm
+    volumes:
+      - .:/var/www/html
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
 volumes:
   db_data:
 
@@ -20,6 +30,3 @@ networks:
   default:
     external:
       name: my-predefined-network
-
-environment:
-  DATABASE_URL: "mysql://root:secret@127.0.0.1:3306/madamarket?serverVersion=8.0"

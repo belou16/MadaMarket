@@ -1,0 +1,124 @@
+{# templates/profile/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil - MadaMarket{% endblock %}
+
+{% block body %}
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: 2rem auto;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        background: white;
+        color: #667eea;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        margin: 0 auto 1rem;
+    }
+
+    .profile-info {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        margin-bottom: 2rem;
+    }
+
+    .info-row {
+        display: flex;
+        padding: 1rem 0;
+        border-bottom: 1px solid #ecf0f1;
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #7f8c8d;
+        width: 150px;
+    }
+
+    .info-value {
+        color: #2c3e50;
+        flex: 1;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .danger-zone {
+        background: #fff5f5;
+        border: 1px solid #feb2b2;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-top: 2rem;
+    }
+
+    .danger-zone h3 {
+        color: #e74c3c;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-avatar">👤</div>
+        <h1>{{ user.fullName }}</h1>
+        <p>{{ user.email }}</p>
+    </div>
+
+    <div class="profile-info">
+        <h2 style="margin-bottom: 1.5rem; color: #2c3e50;">Mes informations</h2>
+        
+        <div class="info-row">
+            <span class="info-label">Prénom :</span>
+            <span class="info-value">{{ user.firstName }}</span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Nom :</span>
+            <span class="info-value">{{ user.lastName }}</span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Email :</span>
+            <span class="info-value">{{ user.email }}</span>
+        </div>
+
+        <div class="action-buttons" style="margin-top: 2rem;">
+            <a href="{{ path('app_profile_edit') }}" class="btn btn-primary">Modifier mon profil</a>
+            <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour à l'accueil</a>
+        </div>
+    </div>
+
+    <div class="danger-zone">
+        <h3>Zone dangereuse</h3>
+        <p style="margin-bottom: 1rem;">La suppression de votre compte est irréversible.</p>
+        <form method="post" action="{{ path('app_profile_delete') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+            <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

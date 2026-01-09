@@ -1,11 +1,16 @@
+{# templates/reset_password/check_email.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}Email envoyé - MadaMarket{% endblock %}
 
 {% block body %}
-    <p>
-        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+<div class="container">
+    <div class="card" style="max-width: 600px; margin: 3rem auto; text-align: center;">
+        <h1 style="color: #27ae60; margin-bottom: 1rem;">✉️ Email envoyé !</h1>
+        <p>Un email vous a été envoyé avec un lien pour réinitialiser votre mot de passe.</p>
+        <p style="margin-top: 1.5rem;">
+            <a href="{{ path('app_login') }}" class="btn btn-primary">Retour à la connexion</a>
+        </p>
+    </div>
+</div>
 {% endblock %}

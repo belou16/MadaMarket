@@ -1,23 +1,319 @@
+{# templates/registration/register.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription - MadaMarket{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+<style>
+    .auth-container {
+        max-width: 450px;
+        margin: 3rem auto;
+    }
 
-    <h1>Register</h1>
+    .auth-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
 
-    {{ form_errors(registrationForm) }}
+    .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    .auth-header h1 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    .auth-header p {
+        color: #7f8c8d;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        margin-top: 0.3rem;
+    }
+
+    .auth-links {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .auth-links a {
+        color: #667eea;
+        text-decoration: none;
+    }
+
+    .auth-links a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>🌴 Inscription</h1>
+            <p>Créez votre compte MadaMarket</p>
+        </div>
+
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.firstName) }}
+                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.firstName) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.lastName) }}
+                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.lastName) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+
+            <div class="checkbox-group">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms) }}
+            </div>
+            {{ form_errors(registrationForm.agreeTerms) }}
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">S'inscrire</button>
+
+            <div class="auth-links">
+                <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+{% endblock %}{# templates/registration/register.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - MadaMarket{% endblock %}
+
+{% block body %}
+<style>
+    .auth-container {
+        max-width: 450px;
+        margin: 3rem auto;
+    }
+
+    .auth-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .auth-header h1 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-header p {
+        color: #7f8c8d;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        margin-top: 0.3rem;
+    }
+
+    .auth-links {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .auth-links a {
+        color: #667eea;
+        text-decoration: none;
+    }
+
+    .auth-links a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>🌴 Inscription</h1>
+            <p>Créez votre compte MadaMarket</p>
+        </div>
+
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.firstName) }}
+                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.firstName) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.lastName) }}
+                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.lastName) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+
+            <div class="checkbox-group">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms) }}
+            </div>
+            {{ form_errors(registrationForm.agreeTerms) }}
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">S'inscrire</button>
+
+            <div class="auth-links">
+                <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
+{% endblock %}{# templates/registration/register.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - MadaMarket{% endblock %}
+
+{% block body %}
+<style>
+    .auth-container {
+        max-width: 450px;
+        margin: 3rem auto;
+    }
+
+    .auth-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .auth-header h1 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-header p {
+        color: #7f8c8d;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        margin-top: 0.3rem;
+    }
+
+    .auth-links {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .auth-links a {
+        color: #667eea;
+        text-decoration: none;
+    }
+
+    .auth-links a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>🌴 Inscription</h1>
+            <p>Créez votre compte MadaMarket</p>
+        </div>
+
+        {{ form_start(registrationForm) }}
+            <div class="form-group">
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.firstName) }}
+                {{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.firstName) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.lastName) }}
+                {{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.lastName) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+
+            <div class="checkbox-group">
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_label(registrationForm.agreeTerms) }}
+            </div>
+            {{ form_errors(registrationForm.agreeTerms) }}
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">S'inscrire</button>
+
+            <div class="auth-links">
+                <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Se connecter</a></p>
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
+</div>
 {% endblock %}

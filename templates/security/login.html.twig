@@ -1,34 +1,95 @@
+{# templates/security/login.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion - MadaMarket{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+<style>
+    .auth-container {
+        max-width: 450px;
+        margin: 3rem auto;
+    }
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+    .auth-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .auth-header h1 {
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .auth-header p {
+        color: #7f8c8d;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .auth-links {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .auth-links a {
+        color: #667eea;
+        text-decoration: none;
+    }
+
+    .auth-links a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>🌴 Connexion</h1>
+            <p>Connectez-vous à votre compte MadaMarket</p>
         </div>
-    {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
+        <form method="post">
+            <div class="form-group">
+                <label for="inputEmail">Adresse email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember_me" name="_remember_me">
+                <label for="remember_me">Se souvenir de moi</label>
+            </div>
+
+            <button class="btn btn-primary" type="submit" style="width: 100%;">Se connecter</button>
+
+            <div class="auth-links">
+                <p><a href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a></p>
+                <p>Pas encore de compte ? <a href="{{ path('app_register') }}">S'inscrire</a></p>
+            </div>
+        </form>
     </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+</div>
 {% endblock %}

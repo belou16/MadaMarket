@@ -1,5 +1,4 @@
 <?php
-<?php
 
 namespace App\Mailer;
 
@@ -27,3 +26,4 @@ class MyMailer
         $this->mailer->send($email);
     }
 }
+?>
